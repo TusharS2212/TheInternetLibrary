@@ -1,0 +1,118 @@
+﻿@model LibraryManagement.Models.BooksModels
+
+@{
+    ViewBag.Title = "BookDetails";
+}
+<head>
+    <style>
+
+        .BookImg {
+            display: flex;
+            justify-content: center;
+            grid-area: image;
+            height: 350px;
+            width: 300px;
+            border: 1px solid black;
+            margin: 10px 0 0 0;
+        }
+
+        .BookName {
+            grid-area: name;
+        }
+
+        .BookId {
+            grid-area: id;
+            width: 100px;
+        }
+
+        .BookAuthor {
+            grid-area: author;
+        }
+
+        .BookPrice {
+            grid-area: price;
+        }
+
+        .BookStock {
+            grid-area: stock;
+        }
+
+        .BookDescription {
+            grid-area: descrip;
+        }
+
+        .BookGenre {
+            grid-area: genre;
+        }
+
+        .BookLanguage {
+            grid-area: language;
+        }
+
+        .BookEdition {
+            grid-area: edition;
+        }
+
+        .BookId, .BookName, .BookAuthor, .BookDescription, .BookEdition, .BookGenre, .BookLanguage, .BookPrice, .BookStock {
+            border: 1px solid red;
+            max-width: 1000px;
+            padding: 3px;
+            font-family: Georgia,"Palatino Linotype","Book Antiqua",Palatino,serif;
+            margin: 10px 0 0;
+            color: #333;
+            font-size: 2em;
+        }
+
+
+        .grid-container > div {
+            text-align: unset;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-rows: 0.5fr .4fr .4fr 1fr 1fr;
+            grid-template-columns: .5fr .5fr 1fr 1fr 1fr;
+            grid-template-areas:
+                'image image name name name id '
+                'image image author . . .'
+                'image image price stock . .'
+                'image image descrip descrip . .'
+                'image image descrip descrip . .';
+            gap: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+
+        <div class="BookImg">
+            <img src="@Html.DisplayFor(model => model.BookImage)">
+        </div>
+
+        <div class="BookName">@Html.DisplayFor(model => model.BookName)</div>  <div class="BookId"> @Html.DisplayFor(model => model.BookId)</div>
+
+
+        <div class="BookAuthor">by @Html.DisplayFor(model => model.BookImage)</div>
+        <div class="BookPrice">Price: @Html.DisplayFor(model => model.Cost)</div>
+
+        <div class="BookStock">InStock: @Html.DisplayFor(model => model.BookStock)</div>
+
+        <div class="BookDescription">@Html.DisplayFor(model => model.BookDescription)</div>
+
+        @*<div class="BookGenre">@Html.DisplayFor(modelItem => item.Genre)</div>
+
+            <div class="BookLanguage">@Html.DisplayFor(modelItem => item.Language)</div>
+
+            <div class="BookEdition">@Html.DisplayFor(modelItem => item.Edition)</div>*@
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div>
+                @Html.ActionLink("Edit", "EditBooks", new { id = Model.Id })
+
+                @Html.ActionLink("Delete", "DeleteBooks", new { id = Model.Id })
+            </div>
+        }
+
+    </div>
+</body>
